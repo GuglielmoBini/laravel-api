@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md shadow-sm">
+<nav class="navbar navbar-expand-md bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             <div class="logo_laravel">
