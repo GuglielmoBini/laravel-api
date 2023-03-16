@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('projects', ProjectController::class);
+// Route::apiResource('projects', ProjectController::class);
+
+Route::get('/projects', [ProjectController::class, 'index']);
+
+Route::get('/projects/{project}', [ProjectController::class, 'show']);
