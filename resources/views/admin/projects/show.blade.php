@@ -23,7 +23,7 @@
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Descrizione</h5>
                   <p class="card-text flex-grow-1">{{ $project->description }}</p>
-                  <p class="card-text"><small class="text-muted"><strong>Created: </strong>{{ $project->created_at }}</small></p>
+                  <p class="card-text"><small class="text-muted"><strong>Created: </strong>{{ $date }}</small></p>
                   <p class="card-text"><small class="text-muted"><strong>Type: </strong>{{ $project->type?->label }}</small></p>
                   <ul class="p-0 m-0">
                     @forelse ($project->technologies as $technology)
