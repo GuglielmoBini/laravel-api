@@ -36,6 +36,7 @@ class ProjectController extends Controller
     {
         $project = Project::with('type', 'technologies')->find($id);
         if (!$project) return response(null, 404);
+        if ($project->image_url) $project->image_url = url('storage/' . $project->image_url);
 
         return response()->json($project);
     }
