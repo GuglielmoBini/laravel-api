@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,11 @@ class Project extends Model
     public function technologies()
     {
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function getDate($date_column, $format = 'd/m/y')
+    {
+        $date = $this->$date_column;
+        return Carbon::create($date)->format($format);
     }
 }

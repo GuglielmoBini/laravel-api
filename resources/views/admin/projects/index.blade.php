@@ -28,8 +28,8 @@
                      - 
                     @endif
                 </td>
-                <td>{{ $project->created_at }}</td>
-                <td class="border-end">{{ $project->updated_at }}</td>
+                <td>{{ $project->getDate('created_at') }}</td>
+                <td class="border-end">{{ $project->getDate('updated_at', 'd/m/y H:i') }}</td>
                 <td class="border-end">
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-success">
