@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ProjectCancellationMail;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use App\Mail\ProjectCreationMail;
+use App\Mail\ProjectEditMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -150,6 +150,12 @@ class ProjectController extends Controller
         // assegno le tecnologie
         if (Arr::exists($data, 'technologies')) $project->technologies()->sync($data['technologies']);
         else if (count($project->technologies)) $project->technologies()->detach();
+        // imposto mail per modifica progetto
+        if ($project) {
+            $email = new ProjectEditMail($project);
+            $user_email = Auth::user()->email;
+            Mail::to($user_email)->send($email);
+        }
 
         return to_route('admin.projects.show', $project->id)->with('type', 'warning')->with('msg', 'Modifica avvenuta con successo.');
     }
