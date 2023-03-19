@@ -29,4 +29,9 @@ class Project extends Model
         $date = $this->$date_column;
         return Carbon::create($date)->format($format);
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:d/m/y H:i',
+        'updated_at' => 'datetime:d/m/y H:i:s',
+    ];
 }
