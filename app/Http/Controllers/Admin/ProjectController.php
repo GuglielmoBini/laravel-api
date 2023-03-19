@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ProjectCancellationMail;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use App\Mail\ProjectCreationMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -74,6 +78,12 @@ class ProjectController extends Controller
         $project->save();
         // relaziono il progetto con le tecnologie
         if (Arr::exists($data, 'technologies')) $project->technologies()->attach($data['technologies']);
+        // imposto mail per avvenuta creazione progetto
+        if ($project) {
+            $email = new ProjectCreationMail($project);
+            $user_email = Auth::user()->email;
+            Mail::to($user_email)->send($email);
+        }
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Nuovo progetto creato con successo.');
     }

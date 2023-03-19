@@ -1,0 +1,1 @@
+<h1>Il nuovo progetto {{ $name }} è stato creato!</h1>
